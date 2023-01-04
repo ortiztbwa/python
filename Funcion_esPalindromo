@@ -1,0 +1,11 @@
+texto = "testset"
+
+
+def esPalindromo(texto):
+  lenght = len(texto)
+  for j in range(lenght):
+    if texto[j] != texto[-1-j]:
+      return False
+  return True    
+
+esPalindromo(texto)
