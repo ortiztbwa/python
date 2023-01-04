@@ -28,3 +28,5 @@ for key, row in df.iterrows():
       df["ventas_acum"][key] = df["ventas_acum"][key]+df_1["ventas"][key_1]
 
 print(df.sort_values(by=["pais","periodo"], ascending=True))
+
+df_1.merge(df,how="inner", left_on=["pais","periodo"], right_on=["pais","periodo"])
