@@ -1,0 +1,30 @@
+dict_1 = {
+            "periodo":["2021-01-01","2021-01-01","2021-03-01","2021-04-01","2021-05-01","2021-06-01","2021-07-01","2021-08-01","2021-01-01","2021-02-01","2021-03-01","2021-04-01","2021-05-01","2021-06-01","2021-07-01","2021-08-01"],
+            "pais":["A","A","A","A","A","A","A","A","B","B","B","B","B","B","B","B"],
+            "ventas":[1,1,1,1,1,1,1,1,2,4,6,8,10,12,14,16]
+}
+
+
+list_1 = list(dict.fromkeys(dict_1["periodo"]))
+list_2 = list(dict.fromkeys(dict_1["pais"]))
+
+dict_0 = {"pais" : [],
+          "periodo" : [],
+          "ventas_acum":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        }
+
+for i in list_1:
+  for j in list_2:
+    dict_0['periodo'].append(i)
+    dict_0['pais'].append(j) 
+
+df = pd.DataFrame.from_dict(dict_0)
+df_1 = pd.DataFrame.from_dict(dict_1)
+df_1["ventas_acum"]=0
+
+for key, row in df.iterrows():    
+  for key_1, row_1 in df_1.iterrows(): 
+    if row["periodo"]>=row_1["periodo"] and row["pais"]==row_1["pais"]:
+      df["ventas_acum"][key] = df["ventas_acum"][key]+df_1["ventas"][key_1]
+
+print(df.sort_values(by=["pais","periodo"], ascending=True))
